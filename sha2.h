@@ -35,64 +35,18 @@
 #include "config.h"
 #include "miner.h"
 
-<<<<<<< HEAD
 #ifndef SHA2_H
 #define SHA2_H
-=======
-    unsigned char ipad[64];     /*!< HMAC: inner padding        */
-    unsigned char opad[64];     /*!< HMAC: outer padding        */
-    int is224;                  /*!< 0 => SHA-256, else SHA-224 */
-}
-sha2_context;
->>>>>>> parent of deb9aec0... Remove the unused sha224 functions.
 
 #define SHA256_DIGEST_SIZE ( 256 / 8)
 #define SHA256_BLOCK_SIZE  ( 512 / 8)
 
-<<<<<<< HEAD
 typedef struct {
     unsigned int tot_len;
     unsigned int len;
     unsigned char block[2 * SHA256_BLOCK_SIZE];
     uint32_t h[8];
 } sha256_ctx;
-=======
-/**
- * \brief          SHA-256 context setup
- *
- * \param ctx      context to be initialized
- * \param is224    0 = use SHA256, 1 = use SHA224
- */
-void sha2_starts( sha2_context *ctx, int is224 );
-
-/**
- * \brief          SHA-256 process buffer
- *
- * \param ctx      SHA-256 context
- * \param input    buffer holding the  data
- * \param ilen     length of the input data
- */
-void sha2_update( sha2_context *ctx, const unsigned char *input, int ilen );
-
-/**
- * \brief          SHA-256 final digest
- *
- * \param ctx      SHA-256 context
- * \param output   SHA-224/256 checksum result
- */
-void sha2_finish( sha2_context *ctx, unsigned char output[32] );
-
-/**
- * \brief          Output = SHA-256( input buffer )
- *
- * \param input    buffer holding the  data
- * \param ilen     length of the input data
- * \param output   SHA-224/256 checksum result
- * \param is224    0 = use SHA256, 1 = use SHA224
- */
-void sha2( const unsigned char *input, int ilen,
-           unsigned char output[32], int is224 );
->>>>>>> parent of deb9aec0... Remove the unused sha224 functions.
 
 void sha256_init(sha256_ctx * ctx);
 void sha256_update(sha256_ctx *ctx, const unsigned char *message,

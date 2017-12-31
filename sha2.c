@@ -68,7 +68,6 @@
           + SHA256_F3(w[i - 15]) + w[i - 16]; \
 }
 
-<<<<<<< HEAD
 uint32_t sha256_h0[8] =
             {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
              0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19};
@@ -137,42 +136,6 @@ void sha256_transf(sha256_ctx *ctx, const unsigned char *message,
             ctx->h[j] += wv[j];
         }
     }
-=======
-/*
- * SHA-256 context setup
- */
-void sha2_starts( sha2_context *ctx, int is224 )
-{
-    ctx->total[0] = 0;
-    ctx->total[1] = 0;
-
-    if( is224 == 0 )
-    {
-        /* SHA-256 */
-        ctx->state[0] = 0x6A09E667;
-        ctx->state[1] = 0xBB67AE85;
-        ctx->state[2] = 0x3C6EF372;
-        ctx->state[3] = 0xA54FF53A;
-        ctx->state[4] = 0x510E527F;
-        ctx->state[5] = 0x9B05688C;
-        ctx->state[6] = 0x1F83D9AB;
-        ctx->state[7] = 0x5BE0CD19;
-    }
-    else
-    {
-        /* SHA-224 */
-        ctx->state[0] = 0xC1059ED8;
-        ctx->state[1] = 0x367CD507;
-        ctx->state[2] = 0x3070DD17;
-        ctx->state[3] = 0xF70E5939;
-        ctx->state[4] = 0xFFC00B31;
-        ctx->state[5] = 0x68581511;
-        ctx->state[6] = 0x64F98FA7;
-        ctx->state[7] = 0xBEFA4FA4;
-    }
-
-    ctx->is224 = is224;
->>>>>>> parent of deb9aec0... Remove the unused sha224 functions.
 }
 
 void sha256(const unsigned char *message, unsigned int len, unsigned char *digest)
@@ -240,7 +203,6 @@ void sha256_final(sha256_ctx *ctx, unsigned char *digest)
     block_nb = (1 + ((SHA256_BLOCK_SIZE - 9)
                      < (ctx->len % SHA256_BLOCK_SIZE)));
 
-<<<<<<< HEAD
     len_b = (ctx->tot_len + ctx->len) << 3;
     pm_len = block_nb << 6;
 
@@ -249,23 +211,6 @@ void sha256_final(sha256_ctx *ctx, unsigned char *digest)
     UNPACK32(len_b, ctx->block + pm_len - 4);
 
     sha256_transf(ctx, ctx->block, block_nb);
-=======
-    if( ctx->is224 == 0 )
-        PUT_ULONG_BE( ctx->state[7], output, 28 );
-}
-
-/*
- * output = SHA-256( input buffer )
- */
-void sha2( const unsigned char *input, int ilen,
-           unsigned char output[32], int is224 )
-{
-    sha2_context ctx;
-
-    sha2_starts( &ctx, is224 );
-    sha2_update( &ctx, input, ilen );
-    sha2_finish( &ctx, output );
->>>>>>> parent of deb9aec0... Remove the unused sha224 functions.
 
     for (i = 0 ; i < 8; i++) {
         UNPACK32(ctx->h[i], &digest[i << 2]);

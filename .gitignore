@@ -45,5 +45,3 @@ lib/warn-on-use.h
 mkinstalldirs
 
 *.swp
-driver-ztex.c
-cgminer.c
